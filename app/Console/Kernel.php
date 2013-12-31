@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('command:FetchHackerNewsData')->twiceDaily(1, 13);
+        // $schedule->command('fetch:hackernews')->everyMinute();
+        $schedule->command('fetch:hackernews')->twiceDaily(1, 13);
     }
 
     /**

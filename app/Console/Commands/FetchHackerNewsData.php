@@ -2,7 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Story;
+use App\Services\HackerNewsService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class FetchHackerNewsData extends Command
 {
@@ -11,14 +15,16 @@ class FetchHackerNewsData extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'fetch:hackernews';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Fetch data from HackerNews';
+    protected $hackerNewsService;
+
 
     /**
      * Create a new command instance.
@@ -28,6 +34,7 @@ class FetchHackerNewsData extends Command
     public function __construct()
     {
         parent::__construct();
+        $this->hackerNewsService = resolve(HackerNewsService::class);
     }
 
     /**
@@ -37,7 +44,8 @@ class FetchHackerNewsData extends Command
      */
     public function handle()
     {
-        dispatch(new \App\Jobs\FetchStories());
-        // return 0;
+        Log::info("Maintain");
+        $this->hackerNewsService->fetchTopStories();
+        $this->info('Successfully fetched and stored HackerNews data.');
     }
 }

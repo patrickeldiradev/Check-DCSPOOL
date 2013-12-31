@@ -16,10 +16,9 @@ class CreateStoriesTable extends Migration
         Schema::create('stories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('url')->nullable();
+            $table->string('by');
             $table->integer('score');
-            $table->integer('author_id');
-            $table->string('category')->default('uncategorized');
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }
